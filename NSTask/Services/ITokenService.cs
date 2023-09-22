@@ -1,6 +1,8 @@
-﻿namespace NSTask.Services
+﻿using NSTask.Models.Dtos;
+
+namespace NSTask.Services
 {
-    public class ITokenService
+    public interface ITokenService
     {
         public Task<TokenResultDto> CreateToken(Guid id, string Email);
     }

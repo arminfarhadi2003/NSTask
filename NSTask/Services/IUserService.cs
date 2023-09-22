@@ -1,4 +1,6 @@
-﻿namespace NSTask.Services
+﻿using NSTask.Models.Dtos;
+
+namespace NSTask.Services
 {
     public interface IUserService
     {

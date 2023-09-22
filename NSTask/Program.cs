@@ -77,7 +77,7 @@ builder.Services.AddSwaggerGen(c =>
     var security = new OpenApiSecurityScheme
     {
         Name = "JWT Auth",
-        Description = "توکن خود را وارد کنید- دقت کنید فقط توکن را وارد کنید",
+        Description = "Enter Token",
         In = ParameterLocation.Header,
         Type = SecuritySchemeType.Http,
         Scheme = "bearer",

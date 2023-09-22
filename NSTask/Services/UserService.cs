@@ -25,7 +25,6 @@ namespace NSTask.Services
                 var result = new LoginResultDto
                 {
                     Token = token.Token,
-                    RefreshToken = token.RefreshToken,
                     IsSuccest = true,
                 };
 

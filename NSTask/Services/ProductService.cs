@@ -18,19 +18,43 @@ namespace NSTask.Services
         {
             var user = await _DbContext.Users.FirstOrDefaultAsync(p => p.Id.ToString() == userId);
 
-            var newProduct = new Product
+            if (user != null)
             {
-                IsAvailable = dto.IsAvailable,
-                Name = dto.Name,
-                ProduceDate = DateTime.Now,
-                ManufactureEmail = user.Email,
-                ManufacturePhone = user.PhoneNumber,
-            };
+                var newProduct = new Product
+                {
+                    IsAvailable = dto.IsAvailable,
+                    Name = dto.Name,
+                    ProduceDate = DateTime.Now,
+                    ManufactureEmail = user.Email,
+                    ManufacturePhone = user.PhoneNumber,
+                };
 
-            await _DbContext.AddAsync<Product>(newProduct);
-            await _DbContext.SaveChangesAsync();
+                var productCheck = await _DbContext.Products.Where(p=>p.ManufactureEmail==newProduct.ManufactureEmail)
+                    .FirstOrDefaultAsync(t=>t.ProduceDate==newProduct.ProduceDate);
 
-            return true;
+                if (productCheck == null) 
+                {
+
+                    await _DbContext.AddAsync<Product>(newProduct);
+                    await _DbContext.SaveChangesAsync();
+
+                    return true;
+                }
+
+                else
+                {
+                    return false;
+                }
+
+            }
+            else
+            {
+                return false;
+            }  
+
+            
+
+
         }
 
         public async Task<bool> EditProduct(int id, EditProductDto dto, string userId)

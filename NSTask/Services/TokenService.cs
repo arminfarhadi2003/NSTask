@@ -11,8 +11,6 @@ namespace NSTask.Services
     {
         public Task<TokenResultDto> CreateToken(Guid id, string Email)
         {
-            SecurityHelper securityHelper = new SecurityHelper();
-
 
             var claims = new List<Claim>
                 {
@@ -33,10 +31,6 @@ namespace NSTask.Services
                 signingCredentials: credentials
                 );
             var jwtToken = new JwtSecurityTokenHandler().WriteToken(token);
-
-            var refreshToken = Guid.NewGuid();
-
-            var RefreshTokenExp = DateTime.Now.AddDays(30);
 
             var tokenResult = new TokenResultDto
             {

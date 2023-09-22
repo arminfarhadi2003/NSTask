@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using NSTask.Data;
+using NSTask.Services;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -60,7 +62,7 @@ builder.Services.AddAuthentication(Options =>
 
             });
 
-builder.Services.AddDbContext<DataBaseContext>(options =>
+builder.Services.AddDbContext<NSDataBase>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefualtConnectionStrings")));
 
 builder.Services.AddScoped<IUserService, UserService>();
